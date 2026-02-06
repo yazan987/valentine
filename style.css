@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Pacifico&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Use system font stack for better performance on mobile */
+body {
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Prevent text selection on mobile */
+  -webkit-user-select: none;
+  user-select: none;
+  /* Improve touch responsiveness */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Animated gradient background */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(41, 128, 185, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(142, 68, 173, 0.15) 0%, transparent 50%);
+  animation: gradientShift 10s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Floating hearts background */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hearts-bg::before,
+.hearts-bg::after {
+  content: '💗';
+  position: absolute;
+  font-size: 2rem;
+  animation: floatHeart 15s infinite;
+  opacity: 0.3;
+}
+
+.hearts-bg::before {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 12s;
+}
+
+.hearts-bg::after {
+  left: 80%;
+  animation-delay: 3s;
+  animation-duration: 18s;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Main container */
+.container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px;
+  background: rgba(30, 30, 46, 0.8);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 40px;
+  border: 2px solid rgba(230, 57, 70, 0.3);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  max-width: 600px;
+  animation: containerBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes containerBounce {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Cute character */
+.cute-character {
+  /* Fluid emoji size */
+  font-size: clamp(3.5rem, 8vw, 5rem);
+  animation: bounce 2s ease-in-out infinite;
+  display: inline-block;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+/* Title */
+#title {
+  font-family: 'Pacifico', cursive;
+  /* Fluid font size that scales between devices */
+  font-size: clamp(1.4rem, 4vw, 2.5rem);
+  margin-bottom: 50px;
+  text-align: center;
+  background: linear-gradient(45deg, #ff6b9d, #e63946, #ff9acb, #ff6b9d);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientText 3s ease infinite, titlePulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(230, 57, 70, 0.3));
+  line-height: 1.3;
+  padding: 0 10px;
+}
+
+@keyframes gradientText {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes titlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+/* Button container */
+.button-container {
+  position: relative;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  min-height: 120px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+button {
+  padding: 20px 50px;
+  /* Fluid button font size */
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  /* Better touch targets on mobile (minimum 44x44px recommended) */
+  min-height: 44px;
+  /* Prevent double-tap zoom on iOS */
+  touch-action: manipulation;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+button:hover {
+  transform: scale(1.15) rotate(-2deg);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#yesBtn {
+  background: linear-gradient(135deg, #e63946 0%, #d62828 100%);
+  color: white;
+  animation: yesGlow 2s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes yesGlow {
+  0%, 100% {
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4), 0 0 30px rgba(230, 57, 70, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(230, 57, 70, 0.6), 0 0 50px rgba(230, 57, 70, 0.5);
+  }
+}
+
+#noBtn {
+  background: linear-gradient(135deg, #666, #444);
+  color: white;
+  position: relative;
+  transition: all 0.3s ease;
+  min-width: 140px;
+  z-index: 10001;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Prevent transform when button is in fixed position (moving) */
+#noBtn[style*="position: fixed"]:hover {
+  transform: none !important;
+}
+
+/* Hover text - FIXED POSITIONING */
+#hoverText {
+  position: fixed;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0;
+  display: none;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 99999;
+  white-space: nowrap;
+  background: #e63946;
+  padding: 15px 30px;
+  border-radius: 25px;
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.8), 0 0 0 3px rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  animation: hoverTextBounce 0.5s ease;
+}
+
+@keyframes hoverTextBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.05); }
+}
+
+/* Spawning text & emojis */
+.spawn {
+  position: fixed;
+  font-size: 1.5rem;
+  font-weight: 700;
+  pointer-events: none;
+  animation: floatFade 3s ease forwards;
+  z-index: 9999;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  max-width: 80vw;
+  text-align: center;
+  word-wrap: break-word;
+  padding: 5px 10px;
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+
+@keyframes floatFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5) translateY(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.2) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.5) translateY(-120px) rotate(15deg);
+  }
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 16px;
+  animation: fall 4s linear forwards;
+  z-index: 9998;
+  border-radius: 2px;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Fireworks canvas */
+#fireworks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+}
+
+/* Success state */
+.success-mode .container {
+  animation: successPulse 1s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 20px 60px rgba(230, 57, 70, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 25px 70px rgba(230, 57, 70, 0.6);
+  }
+}
+
+/* Responsive design */
+
+/* Small phones (up to 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+    max-width: 95%;
+    border-radius: 30px;
+  }
+
+  #title {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    line-height: 1.4;
+  }
+
+  .cute-character {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+  }
+
+  button {
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    min-width: 120px;
+  }
+
+  .button-container {
+    gap: 15px;
+    flex-wrap: wrap;
+    min-height: 100px;
+  }
+
+  #hoverText {
+    font-size: 1rem;
+    padding: 8px 16px;
+    max-width: 80%;
+  }
+
+  .spawn {
+    font-size: 1.2rem;
+    max-width: 90vw;
+  }
+}
+
+/* Medium phones and small tablets (481px to 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  #title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+
+  .cute-character {
+    font-size: 4rem;
+  }
+
+  button {
+    padding: 16px 35px;
+    font-size: 1.2rem;
+  }
+
+  .button-container {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  #hoverText {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+  }
+}
+
+/* Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 35px 30px;
+    max-width: 80%;
+  }
+
+  #title {
+    font-size: 2.2rem;
+  }
+
+  .cute-character {
+    font-size: 4.5rem;
+  }
+
+  button {
+    padding: 18px 45px;
+    font-size: 1.3rem;
+  }
+}
+
+/* Large screens (1025px+) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 650px;
+  }
+}
+
+/* Landscape orientation fixes for phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .container {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  #title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .cute-character {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+
+  .button-container {
+    min-height: 80px;
+    margin-top: 15px;
+  }
+}
+
+/* Extra sparkle effects */
+.sparkle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleFloat 2s ease-out forwards;
+  z-index: 9999;
+  box-shadow: 0 0 6px white;
+}
+
+@keyframes sparkleFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0);
+  }
+}
